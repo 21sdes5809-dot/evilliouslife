@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>EVILLIOUS LIFE SIMULATOR</title>
+<title>EVILLIOUS LIFE SIMULATOR · 세컨드 피리어드</title>
 <style>
 *{box-sizing:border-box}
 :root{--line:#34363d;--panel:#15171c;--muted:#9299a6}
@@ -716,6 +716,11 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
 #modal.event-modal .modal-actions button{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
 #modalMinimizeButton{cursor:pointer!important;pointer-events:auto!important;z-index:60!important}
 @media(max-width:600px){#modal.event-modal .modal-head{padding-left:84px!important;padding-right:84px!important}}
+/* FINAL57b — 선천적 HER 팝업(modal-congenital-ui)도 다른 이벤트 팝업처럼 가운데 정렬 */
+#modal.modal-congenital-ui .modal-head{width:100%!important;padding:0 12px!important;justify-content:center!important}
+#modal.modal-congenital-ui .modal-head h2,#modal.modal-congenital-ui #modalText{width:100%!important;text-align:center!important}
+#modal.modal-congenital-ui .modal-actions{width:100%!important;max-width:440px!important;margin:8px auto 0!important;display:flex!important;flex-direction:column!important;align-items:stretch!important}
+#modal.modal-congenital-ui .modal-actions button{width:100%!important;max-width:440px!important;margin:0 auto!important;text-align:center!important;box-sizing:border-box!important}
 </style>
 </head>
 <body>
