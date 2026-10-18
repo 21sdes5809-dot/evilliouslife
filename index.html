@@ -379,7 +379,8 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
 #modal .spend-category-button,#modal .spend-item-button{width:min(100%,420px)!important;text-align:center!important}
 #modal .spend-category-details{width:min(100%,420px)!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:7px!important;padding:8px!important;margin:-9px auto 0!important;border:1px solid #444!important;border-top:0!important;border-radius:0 0 10px 10px!important;background:#181818!important}
 #modal .spend-category-details .spend-item-button{width:100%!important;max-width:none!important}
-#modal .modal-minimize{display:none!important}
+#modal .modal-minimize{display:block!important}
+#modal.language-modal .modal-minimize,#modal.modal-congenital-ui .modal-minimize{display:none!important}
 /* 언어 설정도 완전히 동일한 카드 구조. 버튼은 반드시 세로 1열. */
 #modal.language-modal .modalbox{width:min(92vw,520px)!important;max-width:520px!important;padding:24px 20px!important;text-align:center!important}
 #modal.language-modal .modal-head{min-height:52px!important;margin-bottom:16px!important;padding:0!important}
@@ -393,6 +394,37 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
 #modal.modal-congenital-ui .modal-head h2,#modal .modalbox.modal-congenital .modal-head h2{max-width:100%!important;text-align:center!important}
 #modal.modal-congenital-ui #modalText,#modal .modalbox.modal-congenital #modalText{text-align:center!important}
 @media(max-width:600px){#modal{padding:10px!important}#modal .modalbox{width:calc(100vw - 20px)!important;max-width:none!important;max-height:88dvh!important;padding:18px 14px!important;border-radius:14px!important}#modal .modal-head{min-height:44px!important;margin-bottom:11px!important}#modal .modal-head h2{font-size:1.25rem!important}#modal #modalText{font-size:.88rem!important;line-height:1.55!important;margin-bottom:14px!important}#modal .modal-actions{gap:8px!important}#modal .modal-actions button{width:100%!important;max-width:420px!important;min-height:46px!important;padding:10px 12px!important;font-size:.88rem!important}#modal.language-modal .modalbox{width:calc(100vw - 20px)!important;padding:20px 14px!important}#modal.language-modal .modal-head h2{font-size:1.5rem!important}}
+
+/* FINAL CENTERED MODAL FIX — viewport 기준으로 항상 정중앙 고정 */
+#modal{
+  position:fixed!important;
+  left:0!important; top:0!important; right:0!important; bottom:0!important;
+  width:100vw!important; height:100dvh!important;
+  margin:0!important; padding:16px!important;
+  display:none!important;
+  align-items:center!important; justify-content:center!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+#modal.show{display:flex!important;}
+#modal .modalbox{
+  position:relative!important;
+  left:auto!important; top:auto!important; right:auto!important; bottom:auto!important;
+  margin:0!important;
+  transform:none!important;
+  flex:0 1 auto!important;
+  align-self:center!important;
+  justify-self:center!important;
+}
+#modal .modal-head,#modal #modalText,#modal .modal-actions{
+  margin-left:0!important; margin-right:0!important;
+}
+#modal .modal-head{justify-content:center!important;}
+#modal .modal-head h2{margin-left:auto!important; margin-right:auto!important;}
+#modal #modalText{text-align:center!important;}
+#modal .modal-actions{align-items:stretch!important;}
+#modal .modal-actions button{margin-left:0!important; margin-right:0!important;}
 
 /* FINAL POPUP CARD OVERRIDE — 모든 일반 팝업/언어 설정 공통 */
 #modal{
@@ -433,12 +465,12 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
 #modal .modal-actions{
   width:100%!important; margin:0!important; padding:0!important;
   display:flex!important; flex-direction:column!important;
-  align-items:stretch!important; gap:9px!important;
+  align-items:center!important; justify-content:flex-start!important; gap:9px!important;
   box-sizing:border-box!important;
 }
 #modal .modal-actions button{
-  display:block!important; width:100%!important; min-width:0!important;
-  min-height:50px!important; margin:0!important; padding:11px 14px!important;
+  display:block!important; width:min(100%,420px)!important; min-width:0!important; max-width:420px!important;
+  min-height:50px!important; margin:0 auto!important; padding:11px 14px!important;
   text-align:center!important; white-space:normal!important;
   word-break:keep-all!important; overflow-wrap:anywhere!important;
   border:1px solid #555!important; border-radius:10px!important;
@@ -501,6 +533,28 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
   #modal .modal-actions button{min-height:48px!important; padding:10px 12px!important; font-size:.92rem!important}
   #modal.language-modal .modalbox{width:calc(100vw - 24px)!important; padding:20px!important}
   #modal.language-modal .modal-head h2{font-size:1.4rem!important}
+}
+
+/* FINAL CHOICE ALIGNMENT: event choices are centered as a vertical stack. */
+#modal.event-modal .modal-actions{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:100%!important;
+  gap:9px!important;
+}
+#modal.event-modal .modal-actions button{
+  width:min(100%,420px)!important;
+  max-width:420px!important;
+  margin:0 auto!important;
+  text-align:center!important;
+  box-sizing:border-box!important;
+}
+#modal.event-modal .modal-actions button > span,
+#modal.event-modal .modal-actions button .spend-desc,
+#modal.event-modal .modal-actions button .spend-flavor{
+  text-align:center!important;
 }
 </style>
 
@@ -1713,10 +1767,19 @@ function randomSeed7(){
 function normalizeSeed(raw){
   const v=String(raw??'').trim();
   if(!v)return randomSeed7();
-  if(v==='엘드'||v.toLowerCase()==='eld')return '엘드';
-  if(v==='레비아'||v.toLowerCase()==='levia')return '레비아';
-  // 숫자뿐 아니라 사용자가 입력한 모든 문자열을 그대로 시드로 사용한다.
-  // 따라서 같은 문자열을 입력하면 브라우저가 달라도 동일한 결과가 나온다.
+  const key=v.toLowerCase();
+  // 특수 캐릭터는 한국어/영어/일본어 이름 중 어느 것으로 입력해도
+  // 동일한 내부 시드로 정규화하여 완전히 같은 설정과 난수 흐름을 사용합니다.
+  // Levia = レヴィア, Eld = エルド, Michael = マイケル, Seth = セト
+  const specialSeedAliases={
+    '레비아':'레비아','levia':'레비아','レヴィア':'레비아',
+    '엘드':'엘드','eld':'엘드','エルド':'엘드',
+    '마이클':'마이클','michael':'마이클','マイケル':'마이클',
+    '세트':'세트','seth':'세트','セト':'세트'
+  };
+  if(Object.prototype.hasOwnProperty.call(specialSeedAliases,v))return specialSeedAliases[v];
+  if(Object.prototype.hasOwnProperty.call(specialSeedAliases,key))return specialSeedAliases[key];
+  // 특수 이름이 아닌 입력은 기존처럼 사용자가 입력한 문자열을 그대로 시드로 사용합니다.
   return v;
 }
 function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
@@ -4605,7 +4668,7 @@ function openModal(title,text,actions){
   box.style.setProperty("display","flex","important");
   box.style.setProperty("flex-direction","column","important");
   box.style.setProperty("flex-wrap","nowrap","important");
-  box.style.setProperty("align-items","stretch","important");
+  box.style.setProperty("align-items","center","important");
   box.style.setProperty("width","100%","important");
   box.style.setProperty("gap","8px","important");
   box.style.setProperty("margin-top","0","important");
