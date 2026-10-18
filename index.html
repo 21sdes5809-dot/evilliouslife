@@ -702,6 +702,20 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
   #modal.show .modalbox,#modal.show.event-modal .modalbox,#modal.show.language-modal .modalbox,#modal.show.spend-modal .modalbox,#modal.show.modal-congenital-ui .modalbox{width:calc(100vw - 24px)!important; max-width:none!important; max-height:86dvh!important;}
   #modalMinimizeButton{top:10px!important; right:10px!important; font-size:.68rem!important; padding:6px 8px!important;}
 }
+/* FINAL57 — 잠시 내리기 먹통 수정 + 이벤트 팝업 정렬 정리
+   원인: #modal.event-modal{display:flex!important} 규칙이 JS의 modal.style.display="none"(비-important)을 항상 이겨서
+   버튼을 눌러도 팝업이 내려가지 않았음. → .is-minimized 클래스 + 더 높은 specificity의 display:none!important 로 해결.
+   또한 잠시 내리기 버튼이 head 밖(modalbox)으로 옮겨졌는데 head에는 오른쪽 padding만 남아 제목이 왼쪽으로 치우쳤음. → 좌우 대칭 padding. */
+#modal.event-modal.show.is-minimized,
+#modal.show.is-minimized.is-minimized,
+#modal.is-minimized.is-minimized.is-minimized{display:none!important;visibility:hidden!important;pointer-events:none!important}
+#modal.event-modal .modal-head{padding-left:96px!important;padding-right:96px!important;justify-content:center!important}
+#modal.event-modal .modal-head h2{text-align:center!important;width:100%!important}
+#modal.event-modal #modalText{text-align:center!important;width:100%!important;margin-left:auto!important;margin-right:auto!important}
+#modal.event-modal .modal-actions{margin-left:auto!important;margin-right:auto!important;align-items:stretch!important}
+#modal.event-modal .modal-actions button{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+#modalMinimizeButton{cursor:pointer!important;pointer-events:auto!important;z-index:60!important}
+@media(max-width:600px){#modal.event-modal .modal-head{padding-left:84px!important;padding-right:84px!important}}
 </style>
 </head>
 <body>
@@ -4877,9 +4891,10 @@ function minimizeModal(){
   const text=document.getElementById("modalMinimizedText");
   if(!modal||!tray)return;
   if(modal.dataset.congenital==="1")return;
-  text.textContent=document.getElementById("modalTitle")?.textContent||"";
+  if(text)text.textContent=document.getElementById("modalTitle")?.textContent||"";
   const rb=document.getElementById("modalRestoreButton"); if(rb)rb.textContent=t("restorePopup");
-  modal.style.display="none";
+  // 인라인 display:none 은 CSS의 !important 규칙에 밀리므로 클래스로 숨긴다.
+  modal.classList.add("is-minimized");
   tray.classList.add("show");
 }
 function restoreModal(){
@@ -4887,9 +4902,9 @@ function restoreModal(){
   const tray=document.getElementById("modalMinimized");
   if(tray)tray.classList.remove("show");
   if(modal){
-    modal.style.display="flex";
+    modal.classList.remove("is-minimized");
+    modal.style.removeProperty("display");
     modal.classList.add("show");
-    if(modal.classList.contains("event-modal")) modal.style.removeProperty("display");
   }
 }
 // 인게임 이벤트 팝업에는 등장 확률/확률 메타데이터를 절대 표시하지 않는다.
@@ -4900,6 +4915,8 @@ function openModal(title,text,actions){
   const modalBox=modal.querySelector(".modalbox");
   if(!modalBox)return;
   actions=Array.isArray(actions)?actions:[];
+  modal.classList.remove("is-minimized");
+  document.getElementById("modalMinimized")?.classList.remove("show");
   const head=document.querySelector("#modal .modal-head");
   const isCongenital=(title===SE.herCongenital.title || text===SE.herCongenital.title);
   const isLanguage=modal.classList.contains("language-modal");
@@ -4992,7 +5009,7 @@ function closeModal(){
       ["display","flex-direction","flex-wrap","align-items","width","gap","margin-top"].forEach(k=>actionBox.style.removeProperty(k));
     }
     modal.classList.remove("modal-congenital-ui","language-modal","event-modal");
-    modal.classList.remove("show");
+    modal.classList.remove("show","is-minimized");
     modal.style.display="";
     modal.classList.remove("congenital-flash");
     modal.dataset.congenital="0";
