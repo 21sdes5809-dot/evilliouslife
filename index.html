@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>EVILLIOUS LIFE SIMULATOR</title>
+<title>EVILLIOUSLIFE</title>
+<meta property="og:title" content="EVILLIOUSLIFE">
+<meta name="twitter:title" content="EVILLIOUSLIFE">
 <style>
 *{box-sizing:border-box}
 :root{--line:#34363d;--panel:#15171c;--muted:#9299a6}
@@ -27,6 +29,26 @@ h2{font-size:1.05rem;margin:0 0 8px}
 h3{font-size:.9rem;margin:0 0 7px}
 hr{border:0;border-top:1px solid #333;margin:9px 0}
 .footer{color:#777;text-align:center;font-size:.72rem;border-top:1px solid #2b2b2b;padding:10px 3px;margin-top:10px}
+
+
+/* 0.11 공지 배너 */
+.notice-banner{
+  width:100%;margin:8px 0 10px;padding:11px 13px;
+  border:1px solid #5a4a20;border-radius:10px;
+  background:linear-gradient(135deg,#211e16,#18191e);
+  color:#eee;text-align:left;cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);
+  transition:transform .12s ease,background .12s ease,border-color .12s ease;
+}
+.notice-banner:hover{transform:translateY(-1px);background:linear-gradient(135deg,#29251a,#1c1e24);border-color:#8a702d}
+.notice-banner:active{transform:translateY(0)}
+.notice-banner .notice-label{display:block;color:#d7b34e;font-size:.66rem;font-weight:900;letter-spacing:.12em;margin-bottom:4px}
+.notice-banner .notice-title{display:block;font-size:.9rem;font-weight:800;line-height:1.4}
+.notice-banner .notice-hint{display:block;margin-top:3px;color:#9299a6;font-size:.68rem}
+body.light .notice-banner{background:#fff8df;border-color:#dfc56f;color:#252a31;box-shadow:0 2px 10px rgba(30,40,55,.06)}
+body.light .notice-banner:hover{background:#fff4ca;border-color:#c7a83c}
+body.light .notice-banner .notice-label{color:#8c6918}
+body.light .notice-banner .notice-hint{color:#737c89}
 
 /* 메인 화면 */
 .title-card{margin-top:3vh}
@@ -643,6 +665,57 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
 #modal.event-modal .modal-minimize{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;right:8px!important;top:50%!important;transform:translateY(-50%)!important;z-index:5!important;pointer-events:auto!important;white-space:nowrap!important}
 #modal.event-modal .modal-head:has(.modal-minimize){padding-right:92px!important}
 @media(max-width:600px){#modal.event-modal .modalbox{width:calc(100vw - 24px)!important;max-height:84dvh!important;padding:16px!important}#modal.event-modal .modal-head{padding-left:8px!important;padding-right:86px!important}#modal.event-modal .modal-minimize{right:4px!important;font-size:.66rem!important;padding:6px 8px!important}}
+
+/* ===== 햄버거 메뉴 / 제작자 화면 ===== */
+.menu-btn{display:inline-flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;width:40px;height:38px;padding:0}
+.menu-btn span{display:block;width:18px;height:2px;border-radius:2px;background:currentColor}
+#sideMenu{position:fixed;inset:0;z-index:90;background:#101010;color:#eee;display:none;overflow-y:auto}
+#sideMenu.show{display:block}
+.sm-inner{width:min(100%,800px);margin:auto;min-height:100%}
+.sm-top{display:flex;justify-content:flex-end;align-items:center;gap:0;padding:14px 18px 0;position:relative}
+.sm-lang{background:none;border:0;color:inherit;font-weight:600;font-size:.95rem;padding:6px 14px 6px 6px;border-right:1px solid #333;border-radius:0}
+.sm-close{background:none;border:0;color:inherit;font-size:1.7rem;line-height:1;padding:4px 4px 4px 14px}
+.sm-langlist{position:absolute;right:56px;top:50px;background:#1a1a1a;border:1px solid #444;border-radius:8px;overflow:hidden;display:none;z-index:2;min-width:120px}
+.sm-langlist.open{display:block}
+.sm-langlist button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #2b2b2b;border-radius:0;background:transparent}
+.sm-langlist button:last-child{border-bottom:0}
+.sm-langlist button.on{font-weight:800;color:#d7b34e}
+.sm-logo{text-align:center;padding:34px 10px 38px;font-size:1.25rem;font-weight:900;letter-spacing:.06em;border-bottom:1px solid #2b2b2b}
+.sm-row{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #2b2b2b;border-radius:0;padding:22px 20px;font-size:1.1rem;color:inherit}
+.sm-row:hover{background:rgba(255,255,255,.04)}
+.sm-row .chev{width:10px;height:10px;border-right:1.5px solid #888;border-bottom:1.5px solid #888;transform:rotate(45deg);transition:transform .15s;margin-right:6px}
+.sm-row.open .chev{transform:rotate(-135deg)}
+.sm-sub{display:none;background:#161616;border-bottom:1px solid #2b2b2b}
+.sm-sub.open{display:block}
+.sm-sub button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #232323;border-radius:0;padding:16px 32px;font-size:.98rem;color:inherit}
+.sm-sub button:last-child{border-bottom:0}
+.sm-sub button:hover{background:rgba(255,255,255,.04)}
+body.light #sideMenu{background:#fff;color:#181818}
+body.light .sm-top .sm-lang{border-color:#ddd}
+body.light .sm-logo,body.light .sm-row,body.light .sm-sub,body.light .sm-sub button{border-color:#e3e3e3}
+body.light .sm-row:hover,body.light .sm-sub button:hover{background:#f3f3f3}
+body.light .sm-sub{background:#fafafa}
+body.light .sm-langlist{background:#fff;border-color:#ccc}
+body.light .sm-langlist button{border-color:#eee;color:#222}
+body.light .sm-langlist button.on{color:#8c6918}
+.sub-screen-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.sub-back{padding:8px 12px}
+.creator-name{text-align:center;font-size:1.7rem;font-weight:900;letter-spacing:.08em;margin:22px 0 4px}
+.creator-role{text-align:center;color:var(--muted);font-size:.75rem;margin-bottom:6px}
+.creator-text{line-height:1.85;font-size:.92rem;word-break:keep-all}
+.creator-text p{margin:0 0 14px}
+.creator-sign{text-align:right;font-weight:700;margin-top:6px}
+.credit-row{display:flex;justify-content:space-between;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line);font-size:.95rem}
+.credit-row:last-child{border-bottom:0}
+.credit-row span:first-child{color:var(--muted);flex:none}
+.credit-row span:last-child{text-align:right}
+.footer-sub{color:#777;text-align:center;font-size:.72rem;padding:0 3px 6px;margin-top:-4px}
+.credit-dim{opacity:.45}
+body.light .credit-row{border-color:#ddd}
+
+/* 시간 흐르는 바 길이 확대 */
+.life-summary{gap:8px}
+@media(max-width:600px){.life-summary{grid-template-columns:minmax(0,.72fr) minmax(0,2.1fr) auto;gap:5px}}
 </style>
 
 <style id="final47-popup-override">
@@ -923,11 +996,17 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
     <div class="header">
       <div>
         <h1>EVILLIOUS LIFE SIMULATOR</h1>
-        <div class="small" id="versionLabel" title="Developer View">Version 0.10</div>
+        <div class="small" id="versionLabel" title="Developer View">Version 0.11</div>
       </div>
-      <div style="display:flex;gap:5px"><button onclick="toggleTheme()" id="titleThemeBtn">☀️</button><button type="button" onclick="showUpdatePopup();return false" class="achievement-button" data-i18n="achievements">업적</button></div>
+      <div style="display:flex;gap:5px"><button onclick="toggleTheme()" id="titleThemeBtn">☀️</button><button type="button" id="menuBtn" class="menu-btn" onclick="openSideMenu()" aria-label="menu"><span></span><span></span><span></span></button></div>
     </div>
     <hr>
+
+    <button type="button" class="notice-banner" onclick="showNoticePopup();return false" aria-label="공지: 0.11 버전 수정사항 안내">
+      <span class="notice-label" id="noticeLabel">공지</span>
+      <span class="notice-title" id="noticeTitle">0.11 버전 수정사항 안내</span>
+      <span class="notice-hint" id="noticeHint">눌러서 자세한 내용을 확인하세요.</span>
+    </button>
 
     <div class="card">
       <h3 data-i18n="era">시대</h3>
@@ -963,8 +1042,30 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
     <button class="primary" style="width:100%" onclick="createCharacter()" data-i18n="startLife">삶을 시작한다</button>
     <button id="continueLifeBtn" class="secondary" style="width:100%;display:none;margin-top:7px" onclick="loadSavedLife()" data-i18n="continueLife">저장된 삶 이어하기</button>
     <div id="completedLifeHistory" class="completed-life-history"></div>
-    <button class="secondary language-button" onclick="openLanguageMenu()" data-i18n="languageSettings">언어 설정</button>
-    <div class="footer" data-i18n="fanwork">이 게임은 에빌리오스 시리즈를 기반으로 한 2차창작입니다.</div>
+    <div class="footer" id="footerInspired">이 게임은 에빌리오스 시리즈를 기반으로 한 2차창작이며, 게임 「80억분의 1」에서 영감을 받았습니다.</div>
+  </div>
+</section>
+
+
+<section id="creatorWords" class="screen">
+  <div class="card">
+    <div class="sub-screen-head"><button type="button" class="sub-back" onclick="closeCreatorScreen()" id="cwBack">←</button><h2 id="cwTitle" style="margin:0">제작자의 말</h2></div>
+    <hr>
+    <div class="creator-name" id="cwName">리엔</div>
+    <div class="creator-role" id="cwRole">제작자</div>
+    <hr>
+    <div class="creator-text" id="cwBody"></div>
+  </div>
+</section>
+
+<section id="creatorCredits" class="screen">
+  <div class="card">
+    <div class="sub-screen-head"><button type="button" class="sub-back" onclick="closeCreatorScreen()" id="ccBack">←</button><h2 id="ccTitle" style="margin:0">제작</h2></div>
+    <hr>
+    <div class="credit-row"><span id="ccL1">제작자</span><span id="ccV1">리엔</span></div>
+    <div class="credit-row"><span id="ccL2">리엔의 X(구 트위터)</span><span class="credit-dim">@LoveTwiright</span></div>
+    <div class="credit-row"><span id="ccL3">사용 AI 툴</span><span id="ccV3">챗GPT, Claude AI</span></div>
+    <div class="credit-row"><span id="ccL4">서버</span><span>GitHub</span></div>
   </div>
 </section>
 
@@ -1060,6 +1161,26 @@ body.light .completed-life-item{background:#fff;border-color:#d9dee7}
 
 <div id="emberLayer"></div>
 
+
+<div id="sideMenu" aria-hidden="true">
+  <div class="sm-inner">
+    <div class="sm-top">
+      <button type="button" class="sm-lang" id="smLangBtn" onclick="toggleSmLang()">KOR ▾</button>
+      <button type="button" class="sm-close" onclick="closeSideMenu()" aria-label="close">✕</button>
+      <div class="sm-langlist" id="smLangList">
+        <button type="button" data-l="ko" onclick="smSetLang('ko')">한국어</button>
+        <button type="button" data-l="ja" onclick="smSetLang('ja')">日本語</button>
+        <button type="button" data-l="en" onclick="smSetLang('en')">English</button>
+      </div>
+    </div>
+    <div class="sm-logo">EVILLIOUS LIFE SIMULATOR</div>
+    <button type="button" class="sm-row" id="smAchRow" onclick="toggleSmAch()"><span id="smAchLabel">업적</span><i class="chev"></i></button>
+    <div class="sm-sub" id="smAchList"></div>
+    <button type="button" class="sm-row" onclick="openCreatorScreen('creatorWords')"><span id="smWordsLabel">제작자의 말</span><i class="chev" style="transform:rotate(-45deg)"></i></button>
+    <button type="button" class="sm-row" onclick="openCreatorScreen('creatorCredits')"><span id="smCreditLabel">제작</span><i class="chev" style="transform:rotate(-45deg)"></i></button>
+  </div>
+</div>
+
 <div id="modal" role="dialog" aria-modal="true">
   <div class="modalbox">
     <div class="modal-head"><h2 id="modalTitle"></h2></div>
@@ -1123,9 +1244,15 @@ const uiText={
     "가까운 사람과 사소한 오해가 생겼습니다. 관계 -1":"親しい人との間に小さな誤解が生じました。関係 -1",
 era:"時代",eraOnly:"現在プレイできるのはセカンド・ピリオドのみです。",name:"名前",namePlaceholder:"名前を入力してください",gender:"性別",male:"男性",female:"女性",other:"その他",genderUnset:"選択：未定",randomHint:"名前や性別を決めない場合、人生開始時にランダムで決定されます。",seed:"シード",seedPlaceholder:"シードを入力してください",seedHint:"同じシードを入力すると同じ結果になります。",startLife:"人生を始める",continueLife:"保存した人生を続ける",fanwork:"このゲームはエヴィリオスシリーズを基にした二次創作です。",languageSettings:"言語設定",achievements:"実績",achievementsPending:"実績はまだ準備中です。",ok:"確認",languageTitle:"言語設定",languageClose:"閉じる",minimizePopup:"一時的に閉じる",restorePopup:"ポップアップを開く",familyRelation:"家族関係",parents:"両親",father:"父",mother:"母",siblings:"兄弟姉妹",ageLabel:"年齢",alive:"存命",deceased:"死亡",noFamily:"なし",noSiblings:"兄弟姉妹なし",unknownCause:"原因不明",noOccupation:"職業なし",bombTerror:"爆弾テロ",korean:"韓国語",english:"英語",japanese:"日本語",themeToggle:"テーマ切替",ageUnit:"歳",yearTime:"今年の時間",nextYear:"今年の時間 · 次の年まで",speed:"時間速度",pause:"一時停止",resume:"再生",exit:"終了",traits:"特性",spendMoney:"お金を使う",log:"ログ",inventory:"インベントリ",use:"使用",sell:"売却",emptyInventory:"所持している物はありません。",emptyTraits:"まだ明確な特性はありません。",status:"身分",birth:"生まれ",wealth:"財産",occupation:"職業",none:"なし",school:"在学中",working:"仕事中",health:"健康",knowledge:"知識",mind:"精神",sociality:"社交性",relationship:"関係",record:"記録",choice:"選択",result:"結果",statChanges:"ステータス変化",noChange:"変化なし",languageSave:"言語設定",home:"ホーム",rebirth:"もう一度生まれる",lifeEnded:"人生が終わりました。",lifeRecord:"人生記録",lifeOneLine:"人生一行記録",age:"年齢",cause:"死因",birthCountry:"出生国",family:"家庭",finalWealth:"最終財産",talent:"才能",developerView:"開発者画面",adminInfo:"管理者情報",back:"戻る",generalLogs:"一般ログ",adminNote:"ゲームに登録されたイベント、選択肢、結果、確率、ログ文を読み取って表示します。",lifeHistory:"これまでの人生"}
 };
-let gameLanguage="ko";
-try{gameLanguage=localStorage.getItem("evilliousLanguage")||"ko";}catch(e){}
-if(!["ko","en","ja"].includes(gameLanguage)) gameLanguage="ko";
+let gameLanguage="en";
+(function(){
+  let saved=null;
+  try{saved=localStorage.getItem("evilliousLanguage");}catch(e){}
+  if(["ko","en","ja"].includes(saved)){gameLanguage=saved;return;}
+  // 저장된 언어가 없으면(첫 접속) 브라우저 기본 언어를 따른다. 한국어/일본어 외에는 영어.
+  const nav=String((navigator.languages&&navigator.languages[0])||navigator.language||"en").toLowerCase();
+  gameLanguage=nav.startsWith("ko")?"ko":nav.startsWith("ja")?"ja":"en";
+})();
 function t(key){return (uiText[gameLanguage]&&uiText[gameLanguage][key])||uiText.ko[key]||key;}
 function eraName(name){return (eraLabels[name]&&eraLabels[name][gameLanguage])||name;}
 function eldName(){return eldNames[gameLanguage]||eldNames.ko;}
@@ -2036,6 +2163,12 @@ function applyLanguage(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n);});
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{el.placeholder=t(el.dataset.i18nPlaceholder);});
   const main=document.getElementById("eraMainButton"); if(main)main.textContent=eraName(selectedEra);
+  const noticeLabel=document.getElementById("noticeLabel");
+  const noticeTitle=document.getElementById("noticeTitle");
+  const noticeHint=document.getElementById("noticeHint");
+  if(noticeLabel)noticeLabel.textContent=gameLanguage==="en"?"Notice":gameLanguage==="ja"?"お知らせ":"공지";
+  if(noticeTitle)noticeTitle.textContent=gameLanguage==="en"?"0.11 Version Update":gameLanguage==="ja"?"0.11 バージョン修正内容のお知らせ":"0.11 버전 수정사항 안내";
+  if(noticeHint)noticeHint.textContent=gameLanguage==="en"?"Click to view details.":gameLanguage==="ja"?"クリックして詳細を確認してください。":"눌러서 자세한 내용을 확인하세요.";
   refreshGenderLanguage();
   if(gameLanguage==="ja"){
     const seedLabel=document.querySelector("[data-i18n=\"seed\"]"); if(seedLabel) seedLabel.textContent="シード";
@@ -2055,6 +2188,7 @@ function renderLifeEndIfVisible(){
   if(player && screen && screen.classList.contains("active")){ showLifeEndScreen(player.endReason==="apocalypse"?"apocalypse":"death"); }
 }
 function openLanguageMenu(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="0";
   const title=gameLanguage==="en"?"Language Settings":gameLanguage==="ja"?"言語設定":"언어 설정";
   const close=gameLanguage==="en"?"Close":gameLanguage==="ja"?"閉じる":"닫기";
   const modal=document.getElementById("modal");
@@ -2500,6 +2634,7 @@ function translateValueFor(value, lang){
 }
 
 function showDeathReviewPopup(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="0";
   if(!player)return;
   const cause=player.causeOfDeath||"기록되지 않은 원인";
   const isApocalypse=player.endReason==="apocalypse";
@@ -2592,7 +2727,20 @@ function rebirthFromEnd(){
   createCharacter(n,g);
 }
 
+
+function showNoticePopup(){
+  const modal=document.getElementById("modal");
+  if(modal)modal.dataset.inGameEvent="0";
+  const notice=gameLanguage==="en"
+    ? {title:"Notice", text:"0.11 Version Update\n\nMinor bug fixes, HER-related event and probability adjustments\n\nAdded a menu (Achievements, Language, Words from the Creator, Credits)\n\nPlease understand that bug fixes take a while because GPT is kind of stupid."}
+    : gameLanguage==="ja"
+    ? {title:"お知らせ", text:"0.11 バージョン修正内容のお知らせ\n\n細かなバグ修正、HER関連イベントおよび発生確率の調整\n\nメニュー項目を追加（実績、言語選択、制作者のことば、制作）\n\nバグ修正に時間がかかるのは、GPTがちょっとおバカだからです。ご了承ください。"}
+    : {title:"공지", text:"0.11 버전 수정사항 안내\n\n자질구레한 버그 수정, HER 관련 이벤트 및 확률 조정\n\n메뉴 항목 추가 (업적, 언어 선택, 제작자의 말, 제작)\n\n버그 수정하는것도 지피티가 바보라서 오래걸리는 점 양해 부탁드립니다"};
+  openModal(notice.title,notice.text,[{text:gameLanguage==="en"?"OK":gameLanguage==="ja"?"確認":"확인",fn:closeModal}]);
+}
+
 function showUpdatePopup(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="0";
   openModal(t("achievements"),t("achievementsPending"),[{text:t("ok"),fn:closeModal}]);
 }
 
@@ -2618,6 +2766,7 @@ function buildEraList(){
   });
 }
 function showEraUnavailable(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="0";
   openModal(gameLanguage==="en"?"Coming Soon":gameLanguage==="ja"?"準備中":"업데이트 준비중",t("eraOnly"),[{text:gameLanguage==="en"?"OK":gameLanguage==="ja"?"確認":"확인",fn:closeModal}]);
 }
 function openSpendMenu(){
@@ -3065,6 +3214,7 @@ function parentDeathAtTerror(){
 }
 
 function showMichaelTerrorEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   if(!player||player.dead)return;
   const context="15세의 어느 날, 부모님과 함께 있던 곳에서 폭탄 테러가 발생했습니다.";
   openModal("폭탄 테러",context,[
@@ -3076,6 +3226,7 @@ function showMichaelTerrorEvent(){
 
 function hasHER(){ return !!(player && player.herInfected); }
 function infectHER(source=""){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   if(!player || player.herInfected)return false;
   const resistance=Math.min(0.85,Math.max(0,Number(player.herResistanceBoost)||0));
   // HER 보유자와의 만남에서 호의적으로 반응했을 때만 20% 확률로 감염됩니다.
@@ -3098,6 +3249,7 @@ function infectHER(source=""){
   return true;
 }
 function showCongenitalHERBirthPopup(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   if(!player || !player.herCongenital || player.herCongenitalShown)return;
   player.herCongenitalShown=true;
   const log=document.getElementById("log");
@@ -3168,6 +3320,7 @@ function advanceHERImpulse(yearDelta){
   }
 }
 function showHERCarrierEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const context="HER 보유자로 알려진 사람과 가까운 자리에서 이야기를 나누게 되었습니다.";
   openModal("HER 보유자와의 만남",context,[
@@ -3223,6 +3376,7 @@ function ensureFriend(){
   return addFriend(pick(pool.length?pool:["친구"]));
 }
 function showClosePersonDeathEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   const candidates=getAliveClosePeople().filter(p=>!player.closePersonDeaths[`${p.type}:${p.data?.name||p.type}`]);
   if(!candidates.length)return false;
   const target=pick(candidates);
@@ -3272,6 +3426,7 @@ function showClosePersonDeathEvent(){
 }
 
 function showSethMother93Event(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const mother=player.parents?.mother;
   openModal("1993년",`어머니가 눈앞에 있습니다. 당신은 어머니의 생사를 결정할 수 있는 상황에 놓였습니다.`,[
@@ -3317,6 +3472,7 @@ function resolveHERImpulseAction(scenarioKey,choiceKey,run){
 }
 
 function showHERCaptureEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   if(!player?.herInfected || !player.herDetected || player.herFugitive || player.dead)return false;
   pauseGame();
   const hasWeapon=Array.isArray(player.inventory)&&player.inventory.some(i=>["총","권총","소총","무기"].includes(i));
@@ -3364,6 +3520,7 @@ function showHERCaptureEvent(){
 }
 
 function showHERImpulseEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const closePeople=getAliveClosePeople();
   const closeTarget=pick(closePeople.length?closePeople:[{type:"friend",data:ensureFriend()}]);
@@ -4018,6 +4175,7 @@ function finishEldTraining(){
 }
 
 function pauseForEldMajorChoice(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const choices=randomThreeMajors();
   openModal("전공 선택","엘드의 도움으로 대학 과정까지 수료했습니다. 아직 대학 전공이 없다면 다음 세 전공 중 하나를 선택할 수 있습니다.",choices.map(major=>({text:major,fn:()=>{
@@ -4059,6 +4217,7 @@ function becomeEldDisciple(){
 }
 
 function pauseForEldEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const eldDisplay=eldName();
   const eldGreeting=gameLanguage==="en"
@@ -4225,6 +4384,7 @@ function onBirthday(age){
 }
 
 function pauseForInfantChoice(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   openModal(
     "작은 싹이 움트다",
@@ -4309,6 +4469,7 @@ function adjustSocialOutcomeProbabilities(title,context,label,outcomes){
 }
 
 function eventResult(title,context,label,outcomes){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   outcomes=adjustSocialOutcomeProbabilities(title,context,label,outcomes);
   const weaponRelevant=/범죄|의뢰|위험|추격|위기|테러|수상한/.test(`${title} ${context} ${label}`);
   const weaponProfile=weaponRelevant?getOwnedWeaponProfile():null;
@@ -4343,6 +4504,7 @@ function eventResult(title,context,label,outcomes){
 function makeOutcome(p,result,fn){return {p,result,fn};}
 
 function showChildEvent(age,next){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   const events=[
     {id:"box",title:"낯선 상자",text:"어느 날 작은 상자를 발견했습니다. 안에는 여러 가지 물건이 들어 있습니다.",choices:[
       ["조심스럽게 살펴본다",[
@@ -4654,6 +4816,7 @@ function scheduleWorldEvent(){
 }
 
 function showLeviaEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const context="길을 지나가는 조그마한 여자아이의 가방에서 책 한권이 떨어졌다.";
   const friendOutcome=()=>{
@@ -4709,6 +4872,7 @@ function showLeviaEvent(){
 }
 
 function triggerWorldEvent(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const wy=Number(player.worldYear);
   // 가까운 사람의 사망은 세계 이벤트 때 낮은 확률로 발생합니다.
@@ -4997,6 +5161,7 @@ const basicJobs=[
 ];
 
 function pauseForJobSelection(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const choices=basicJobs.map(([job,desc])=>({text:job,fn:()=>{
     player.occupation=job; player.working=true; player.higherEducation=false; player.jobYears=0;
@@ -5008,6 +5173,7 @@ function pauseForJobSelection(){
 }
 
 function pauseForUniversityMajor(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const majors=[
     ["의학","사람의 몸과 질병을 연구합니다.","의료인"],
@@ -5030,6 +5196,7 @@ function pauseForUniversityMajor(){
 }
 
 function pauseForCareerChoice(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const major=player.universityMajor;
   const careerMap={
@@ -5097,6 +5264,7 @@ function pauseForCareerChoice(){
 }
 
 function pauseForSchool(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   openModal(
     "학교에 갈 나이",
@@ -5109,6 +5277,7 @@ function pauseForSchool(){
 }
 
 function pauseForHigherEducationAttempt(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   const cost=1500;
   const canAfford=player.money>=cost;
   openModal("고등교육 재지원", "재지원하여 고등교육 과정에 진학할 수 있습니다. 재산 1,500이 필요합니다.",[
@@ -5118,6 +5287,7 @@ function pauseForHigherEducationAttempt(){
 }
 
 function pauseForHigherEducation(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   // 고등교육을 받지 못한 경우 16세부터 재지원 가능
   if(player.higherEducation===false && player.age>=16 && !player.higherEducationRetryDone){
@@ -5174,6 +5344,7 @@ function pauseForHigherEducation(){
 }
 
 function pauseForUniversityAttempt(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   const cost=5000;
   const canAfford=player.money>=cost;
   const knowledge=Math.max(0,Math.min(100,Number(player.knowledge)||0));
@@ -5185,6 +5356,7 @@ function pauseForUniversityAttempt(){
 }
 
 function pauseForUniversity(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   const cost=5000;
   const canAfford=player.money>=cost;
@@ -5234,6 +5406,7 @@ function resumeGame(){
 }
 
 function triggerNinetyNineCrisis(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   openModal(
     "HER의 테러",
@@ -5305,6 +5478,7 @@ function triggerNinetyNineCrisis(){
 }
 
 function triggerApocalypse100(){
+  if(document.getElementById("modal"))document.getElementById("modal").dataset.inGameEvent="1";
   pauseGame();
   openModal(
     "마지막 준비",
@@ -5396,6 +5570,7 @@ document.addEventListener("click",function(e){
 function openModal(title,text,actions){
   const modal=document.getElementById("modal");
   if(!modal)return;
+  const inGameEvent=modal.dataset.inGameEvent === "1";
   const modalBox=modal.querySelector(".modalbox");
   if(!modalBox)return;
   actions=Array.isArray(actions)?actions:[];
@@ -5403,7 +5578,7 @@ function openModal(title,text,actions){
   const isCongenital=(title==="악의를 가지고 태어났다." || text==="악의를 가지고 태어났다.");
   const isLanguage=modal.classList.contains("language-modal");
   const isSpend=modal.classList.contains("spend-modal");
-  const isEventPopup=!isLanguage && !isSpend && !isCongenital;
+  const isEventPopup=inGameEvent && !isLanguage && !isSpend && !isCongenital;
   modal.classList.toggle("language-modal", isLanguage);
   modal.classList.toggle("event-modal", isEventPopup);
   modal.dataset.eventLock=(isEventPopup||isCongenital)?"1":"0";
@@ -5481,9 +5656,11 @@ function openModal(title,text,actions){
   modal.classList.add("show");
 }
 function closeModal(){
+  const modalForEventState=document.getElementById("modal");
+  if(modalForEventState)modalForEventState.dataset.inGameEvent="0";
   const modal=document.getElementById("modal");
   const tray=document.getElementById("modalMinimized");
-  if(tray)tray.classList.remove("show");
+  if(tray){tray.classList.remove("show");tray.style.removeProperty("display");}
   if(modal){
     modal.classList.remove("spend-modal");
     const actionBox=modal.querySelector("#modalActions");
@@ -5643,6 +5820,54 @@ try {
 
   setInterval(updateGameEndButton,250);
   document.addEventListener("DOMContentLoaded",updateGameEndButton);
+})();
+</script>
+
+<script id="side-menu-script">
+(function(){
+  const T={
+    ko:{ach:"업적",words:"제작자의 말",credit:"제작",code:"한국어",back:"←",name:"리엔",role:"제작자",
+      wordsTitle:"제작자의 말",credTitle:"제작",l1:"제작자",v1:"리엔",l2:"리엔의 X(구 트위터)",l3:"사용 AI 툴",v3:"챗GPT, Claude AI",l4:"서버",
+      body:["안녕하세요, 여러분. 리엔입니다.","사실 그닥 쓸 건 없었는데 뭔가 있는 척 하고 싶었어요.","일단 처음에 이 게임을 기획하게 된 것은 게임 80억분의 1을 보고 와 나도 저거 하면 재밌겠다 한 게 계기였습니다. 근데 막상 작업 시작하니까 엄청, 좀 험하게 말하자면 졸라 어려웠습니다.","그래도 처음 0.10 버전 공개했을 때 미완성에 버그 덩어리인데도 여러분이 재밌게 해주시니까 계속 할 마음이 들긴 하더라고요.","앞으로도 꾸준히 세컨드 업데이트 하고 좀 괜찮아졌다 싶으면 업데이트 하기 쉬운 시대부터 차근차근 해 볼 예정이예요.","관심 가져주셔서 정말 감사드리며 앞으로도 좋은 게임을 만들도록 노력하겠습니다."],sign:"-리엔",insp:"이 게임은 에빌리오스 시리즈를 기반으로 한 2차창작이며, 게임 「80억분의 1」에서 영감을 받았습니다."},
+    en:{ach:"Achievements",words:"Words from the Creator",credit:"Credits",code:"English",back:"←",name:"Lien",role:"Creator",
+      wordsTitle:"Words from the Creator",credTitle:"Credits",l1:"Creator",v1:"Lien",l2:"Lien's X (formerly Twitter)",l3:"AI Tools Used",v3:"ChatGPT, Claude AI",l4:"Server",
+      body:["Hello, everyone. This is Lien.","To be honest, I didn't have much to write, but I wanted to pretend I did.","What first made me plan this game was watching \"1 in 8 Billion\" and thinking, \"Wow, I'd have fun making something like that.\" But once I actually started, it was incredibly, brutally hard.","Still, when I released version 0.10, unfinished and full of bugs as it was, you all enjoyed it, and that gave me the will to keep going.","I'll keep working on the Second Period updates steadily, and once things feel solid enough, I plan to move on to the eras that are easier to update, one at a time.","Thank you so much for your interest, and I'll keep doing my best to make a good game."],sign:"-Lien",insp:"This game is a fan work based on The Evillious Chronicles, inspired by the game \"1 in 8 Billion\"."},
+    ja:{ach:"実績",words:"制作者のことば",credit:"制作",code:"日本語",back:"←",name:"リエン",role:"制作者",
+      wordsTitle:"制作者のことば",credTitle:"制作",l1:"制作者",v1:"リエン",l2:"リエンのX（旧Twitter）",l3:"使用AIツール",v3:"ChatGPT、Claude AI",l4:"サーバー",
+      body:["こんにちは、みなさん。リエンです。","正直あまり書くことはなかったのですが、何かあるふりをしたくて書いています。","このゲームを作ろうと思ったきっかけは、「80億分の1」というゲームを見て、「自分もこういうのを作ったら楽しそう」と思ったことでした。でも、いざ作り始めてみると、とてつもなく難しかったです。","それでも、0.10バージョンを初めて公開したとき、未完成でバグだらけだったのに楽しんでくださる方がいて、続ける気持ちになれました。","これからもセカンド・ピリオドのアップデートをコツコツ続けて、ある程度よくなってきたら、更新しやすい時代から順番に進めていく予定です。","関心を持ってくださって本当にありがとうございます。これからもよいゲームを作れるよう頑張ります。"],sign:"-リエン",insp:"このゲームはエヴィリオスシリーズを基にした二次創作で、ゲーム「80億分の1」から着想を得ています。"}
+  };
+  const L=()=>T[gameLanguage]||T.ko;
+  const $=id=>document.getElementById(id);
+  let prevScreen='title';
+
+  window.openSideMenu=function(){ renderSideMenu(); $('sideMenu').classList.add('show'); $('sideMenu').setAttribute('aria-hidden','false'); };
+  window.closeSideMenu=function(){ $('sideMenu').classList.remove('show'); $('sideMenu').setAttribute('aria-hidden','true'); $('smLangList').classList.remove('open'); };
+  window.toggleSmLang=function(){ $('smLangList').classList.toggle('open'); };
+  window.smSetLang=function(l){ $('smLangList').classList.remove('open'); setLanguage(l); };
+  window.toggleSmAch=function(){ $('smAchRow').classList.toggle('open'); $('smAchList').classList.toggle('open'); };
+  window.openCreatorScreen=function(id){ closeSideMenu(); renderSideMenu(); showScreen(id); window.scrollTo(0,0); };
+  window.closeCreatorScreen=function(){ showScreen('title'); openSideMenu(); };
+
+  window.renderSideMenu=function(){
+    const l=L();
+    $('smAchLabel').textContent=l.ach; $('smWordsLabel').textContent=l.words; $('smCreditLabel').textContent=l.credit;
+    $('smLangBtn').textContent=l.code+' ▾';
+    $('smLangList').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.l===gameLanguage));
+    const box=$('smAchList'); box.innerHTML='';
+    eras.forEach(([name])=>{
+      const b=document.createElement('button'); b.type='button'; b.textContent=eraName(name);
+      b.onclick=function(){ showUpdatePopup(); };
+      box.appendChild(b);
+    });
+    $('cwTitle').textContent=l.wordsTitle; $('cwName').textContent=l.name; $('cwRole').textContent=l.role;
+    $('cwBody').innerHTML=l.body.map(p=>'<p>'+p+'</p>').join('')+'<div class="creator-sign">'+l.sign+'</div>';
+    $('footerInspired').textContent=l.insp; $('ccTitle').textContent=l.credTitle; $('ccL1').textContent=l.l1; $('ccV1').textContent=l.v1; $('ccL2').textContent=l.l2; $('ccL3').textContent=l.l3; $('ccV3').textContent=l.v3; $('ccL4').textContent=l.l4;
+  };
+
+  // 언어 변경 시 메뉴 문구도 함께 갱신
+  const _apply=window.applyLanguage;
+  window.applyLanguage=applyLanguage=function(){ const r=_apply.apply(this,arguments); try{renderSideMenu();}catch(e){} return r; };
+  try{renderSideMenu();}catch(e){}
 })();
 </script>
 </body>
